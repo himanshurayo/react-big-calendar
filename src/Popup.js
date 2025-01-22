@@ -53,8 +53,12 @@ function Pop({
   popperRef,
   target,
   offset,
+  showCloseButton,
 }) {
-  useClickOutside({ ref: popperRef, callback: show })
+  useClickOutside({
+    ref: popperRef,
+    callback: !showCloseButton ? show : undefined,
+  })
   useLayoutEffect(() => {
     const { topOffset, leftOffset } = getPosition({
       target,
@@ -71,10 +75,24 @@ function Pop({
   const style = {
     minWidth: width + width / 2,
   }
+
+  const overlayHeaderStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    div: {
+      cursor: 'pointer',
+    },
+  }
+
   return (
     <div style={style} className="rbc-overlay" ref={popperRef}>
-      <div className="rbc-overlay-header">
+      <div className="rbc-overlay-header" style={overlayHeaderStyle}>
         {localizer.format(slotStart, 'dayHeaderFormat')}
+        {showCloseButton && (
+          <div onClick={show} style={{ cursor: 'pointer' }}>
+            x
+          </div>
+        )}
       </div>
       {events.map((event, idx) => (
         <EventCell
@@ -122,5 +140,6 @@ Popup.propTypes = {
   handleDragStart: PropTypes.func,
   style: PropTypes.object,
   offset: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  showCloseButton: PropTypes.bool,
 }
 export default Popup

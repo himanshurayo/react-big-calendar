@@ -214,6 +214,7 @@ class MonthView extends React.Component {
       selected,
       popupOffset,
       handleDragStart,
+      showCloseButtonOnPopup,
     } = this.props
 
     const onHide = () => this.setState({ overlay: null })
@@ -235,6 +236,7 @@ class MonthView extends React.Component {
         show={!!overlay.position}
         overlayDisplay={this.overlayDisplay}
         onHide={onHide}
+        showCloseButton={showCloseButtonOnPopup}
       />
     )
 
@@ -408,6 +410,8 @@ MonthView.propTypes = {
       y: PropTypes.number,
     }),
   ]),
+
+  showCloseButton: PropTypes.bool,
 }
 
 MonthView.range = (date, { localizer }) => {

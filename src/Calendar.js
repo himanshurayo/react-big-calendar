@@ -512,6 +512,11 @@ class Calendar extends React.Component {
     popup: PropTypes.bool,
 
     /**
+     * Show Close button to close popup instead of outside click
+     */
+    showCloseButtonOnPopup: PropTypes.bool,
+
+    /**
      * Distance in pixels, from the edges of the viewport, the "show more" overlay should be positioned.
      *
      * ```jsx
@@ -889,6 +894,7 @@ class Calendar extends React.Component {
     backgroundEvents: [],
     elementProps: {},
     popup: false,
+    showCloseButtonOnPopup: false,
     toolbar: true,
     view: views.MONTH,
     views: [views.MONTH, views.WEEK, views.DAY, views.AGENDA],
