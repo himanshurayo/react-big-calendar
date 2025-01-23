@@ -57,7 +57,7 @@ function Pop({
 }) {
   useClickOutside({
     ref: popperRef,
-    callback: !showCloseButton ? show : undefined,
+    callback: !showCloseButton ? show : () => {},
   })
   useLayoutEffect(() => {
     const { topOffset, leftOffset } = getPosition({
